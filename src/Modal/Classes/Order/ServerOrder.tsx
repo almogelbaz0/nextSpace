@@ -1,11 +1,13 @@
-import Orderable from "../../Interfaces/Order/Orderable";
-import OrderParams from "../../Interfaces/Order/OrderParams";
-import Epg from "../Epg";
-import DomainEditable from "../Properites/DomainEditable";
-import EpgEditable from "../Properites/EpgEditable";
-import Server from "../Server";
+import Orderable from '../../Interfaces/Order/Orderable';
+import OrderParams from '../../Interfaces/Order/OrderParams';
+import GraphProps from '../../Service/GraphProps';
+import GraphService from '../../Service/GraphService';
+import Epg from '../Epg';
+import DomainEditable from '../Properites/DomainEditable';
+import EpgEditable from '../Properites/EpgEditable';
+import Server from '../Server';
 
-class ServerOrder extends Server implements Orderable , DomainEditable  , EpgEditable{
+class ServerOrder extends Server implements Orderable , DomainEditable  , EpgEditable {
 
     orderId: string;
 
@@ -16,7 +18,7 @@ class ServerOrder extends Server implements Orderable , DomainEditable  , EpgEdi
     constructor(id: string, orderId : string, epg?:Epg , change? : (serv : Orderable) => void ) {
         super(id,epg);
         this.orderId = orderId;
-        if (change){
+        if (change) {
             this.setOnChangeListner(change);
         }
     }
@@ -62,14 +64,21 @@ class ServerOrder extends Server implements Orderable , DomainEditable  , EpgEdi
     
     
     create(): boolean {
+        const a : GraphProps = {
+            id : this.orderId,
+            domain : this._domain,
+            epg:JSON.stringify(this._epg)
+        }
+        GraphService.createOrder(this.orderId,a)
         return true;
     }
+    
     order(): boolean {
         return true;
     }
+
     editOrder(): boolean {
         return true;
-
     }
 }
 

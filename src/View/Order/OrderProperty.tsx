@@ -41,9 +41,6 @@ const OrderProperty = ({requestProps } : OrderCardProps) =>{
                             <h4>{requestProps.getOptions()} </h4>
                             <h4>{requestProps.helperText} </h4>
                             <input onChange={(event)=> requestProps.onEditValue(event.target.value) }></input>
-                            <button onClick={() => {
-                                requestProps.onEditValue("almog111");
-                                }  }></button>
                         </div> 
                         :
                          <></>

@@ -34,12 +34,14 @@ const OrderCard = ({orderableObj } : OrderCardProps) =>{
 
 
     return (
-        <div>{params?.editProps.map((prop)=>{
-            return <OrderProperty requestProps={prop}></OrderProperty>
-        })}
+        <div>
+            {params?.editProps.map((prop)=>{
+            return <OrderProperty requestProps={prop}></OrderProperty>})}
         {params?.nonEditProps.map((prop)=>{
             return <OrderProperty requestProps={prop}></OrderProperty>
         })}
+
+        <button onClick={() => { order.create()}  }>CREATE</button>
                 
         </div>
     );
